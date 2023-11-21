@@ -117,7 +117,7 @@ public class EnderecoPacienteRepository implements Repository<EnderecoPaciente, 
     }
 
     private EnderecoPaciente buildEnderecoPaciente(ResultSet resultSet) throws SQLException {
-        var id = resultSet.getLong("id_consulta");
+        var id = resultSet.getLong("id_endereco");
         var cep = resultSet.getString("CEP");
         var numeroLogradouro = resultSet.getLong("nr_logradouro");
         var pontoReferencia = resultSet.getString("ds_ponto_referencia");

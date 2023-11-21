@@ -1,0 +1,155 @@
+package br.com.fiap.trataderma.domain.repository.impl;
+
+import br.com.fiap.trataderma.domain.entity.Bicicleta;
+import br.com.fiap.trataderma.domain.repository.Repository;
+import br.com.fiap.trataderma.infra.ConnectionFactory;
+
+import java.io.ByteArrayInputStream;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
+public class BicicletaRepository implements Repository<Bicicleta, Long> {
+
+    private ConnectionFactory connectionFactory;
+
+    private static final AtomicReference<BicicletaRepository> instance = new AtomicReference<>();
+
+    private BicicletaRepository() {
+        this.connectionFactory = ConnectionFactory.build();
+    }
+
+    public static BicicletaRepository buildBicicleta() {
+        instance.compareAndSet(null, new BicicletaRepository());
+        return instance.get();
+    }
+
+
+    @Override
+    public List<Bicicleta> findAll() {
+        var list = new ArrayList<Bicicleta>();
+        Connection con = connectionFactory.getConnection();
+        ResultSet rs = null;
+        Statement st = null;
+
+        var sql = "SELECT * FROM T_BC_BICICLETA";
+
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+
+            if (rs.isBeforeFirst()) {
+                while (rs.next()) {
+
+                    list.add(buildBicicleta(rs));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Não foi possível consultar as bicicletas");
+        } finally {
+            fecharObjetos(rs, st, con);
+        }
+        return list;
+    }
+
+    private Bicicleta buildBicicleta(ResultSet rs) throws SQLException {
+        Long id = rs.getLong("ID_BICICLETA");
+        String marca = rs.getString("NM_MARCA");
+        LocalDate dataModelo = rs.getDate("DT_MODELO_BICICLETA").toLocalDate();
+        Double valor = rs.getDouble("VL_BICICLETA");
+        String cor = rs.getString("COR");
+        String descricaoPecas = rs.getString("DS_PECAS_BICICLETA");
+        Blob fotosBlob = rs.getBlob("FOTOS");
+        byte[] fotos = fotosBlob.getBytes(1L, (int) fotosBlob.length());
+
+        return new Bicicleta(
+                id,
+                marca,
+                dataModelo,
+                valor,
+                cor,
+                descricaoPecas,
+                fotos);
+    }
+
+    @Override
+    public Bicicleta findById(Long id) {
+
+        Bicicleta bicicleta = null;
+        var sql = "SELECT * FROM T_BC_BICICLETA where ID_BICICLETA=?";
+
+        Connection conn = connectionFactory.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+
+            if (rs.isBeforeFirst()) {
+                while (rs.next()) {
+
+                    String marca = rs.getString("NM_MARCA");
+                    LocalDate dataModelo = rs.getDate("DT_MODELO_BICICLETA").toLocalDate();
+                    Double valor = rs.getDouble("VL_BICICLETA");
+                    String cor = rs.getString("COR");
+                    String descricaoPecas = rs.getString("DS_PECAS_BICICLETA");
+                    Blob fotosBlob = rs.getBlob("FOTOS");
+                    byte[] fotos = fotosBlob.getBytes(1L, (int) fotosBlob.length());
+
+                    bicicleta = new Bicicleta(
+                            id,
+                            marca,
+                            dataModelo,
+                            valor,
+                            cor,
+                            descricaoPecas,
+                            fotos);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Não foi possivel realizar a consulta: " + e.getMessage());
+        } finally {
+            fecharObjetos(rs, ps, conn);
+        }
+        return bicicleta;
+    }
+
+    @Override
+    public Bicicleta persist(Bicicleta bicicleta) {
+        var sql = "INSERT INTO T_BC_BICICLETA " +
+                " (NM_MARCA, DT_MODELO_BICICLETA, VL_BICICLETA, COR, DS_PECAS_BICICLETA, FOTOS) " +
+                " values (?, ?, ?, ?, ?, ?)";
+
+        Connection conn = connectionFactory.getConnection();
+        PreparedStatement ps = null;
+        try {
+
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, bicicleta.getMarca());
+            ps.setDate(2, Date.valueOf(bicicleta.getDataModelo()));
+            ps.setDouble(3, bicicleta.getValor());
+            ps.setString(4, bicicleta.getCor());
+            ps.setString(5, bicicleta.getDescricaoPecas());
+            ps.setBlob(6, new ByteArrayInputStream(bicicleta.getFotos()));
+            ps.executeUpdate();
+
+            final ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+                final Long id = rs.getLong(1);
+                bicicleta.setId(id);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Não foi possivel salvar a bicicleta no banco de dados:  " + e.getMessage());
+        } finally {
+            fecharObjetos(null, ps, conn);
+        }
+
+        return bicicleta;
+    }
+}

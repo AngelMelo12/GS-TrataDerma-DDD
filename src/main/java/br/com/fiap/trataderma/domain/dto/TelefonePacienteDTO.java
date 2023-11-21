@@ -1,10 +1,10 @@
 package br.com.fiap.trataderma.domain.dto;
 
 import br.com.fiap.trataderma.domain.entity.TelefonePaciente;
+import br.com.fiap.trataderma.domain.service.impl.PacienteService;
 import br.com.fiap.trataderma.domain.service.impl.TelefonePacienteService;
 
 import java.util.Objects;
-import java.util.function.LongFunction;
 
 public record TelefonePacienteDTO(
 
@@ -14,10 +14,12 @@ public record TelefonePacienteDTO(
         Long numeroTelefone,
         String tipoTelefone,
 
-        PacienteDTO pacienteDTO
+        PacienteDTO paciente
 ) {
 
     private static TelefonePacienteService service = new TelefonePacienteService();
+
+    public static PacienteService pacienteService = new PacienteService();
 
     public static TelefonePaciente of(TelefonePacienteDTO dto) {
 
@@ -30,6 +32,7 @@ public record TelefonePacienteDTO(
         telefonePaciente.setNumeroDdd(dto.numeroDdd);
         telefonePaciente.setNumeroTelefone(dto.numeroTelefone);
         telefonePaciente.setTipoTelefone(dto.tipoTelefone);
+        telefonePaciente.setPaciente(pacienteService.findById(dto.paciente.id()));
 
         return telefonePaciente;
     }

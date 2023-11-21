@@ -42,7 +42,7 @@ public class Consulta {
     }
 
     public void setTelefoneCentral(String telefoneCentral) {
-        telefoneCentral = telefoneCentral;
+        this.telefoneCentral = telefoneCentral;
     }
 
     public Paciente getPaciente() {

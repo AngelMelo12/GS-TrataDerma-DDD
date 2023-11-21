@@ -1,0 +1,529 @@
+{
+	"info": {
+		"_postman_id": "358b6bca-4325-48dd-8c09-fdc7a218afc4",
+		"name": "Endpoints TrataDerma",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8607123"
+	},
+	"item": [
+		{
+			"name": "Cadastro Autentica",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"login\": \"angellmello@gmail.com\",\r\n  \"senha\": \"123\",\r\n  \"status\": \"a\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/autentica",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"autentica"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Lista Autentica",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/autentica",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"autentica"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Autentica por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/autentica/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"autentica",
+						"6"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Paciente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Angel\",\r\n  \"cpf\": 12345,\r\n  \"rg\": 1222,\r\n  \"dataNascimento\": \"2004-03-14\",\r\n  \"sexo\": \"f\",\r\n  \"grupoSanguineo\": \"A-\",\r\n  \"autentica\": {\r\n    \"id\": 6\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/paciente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"paciente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Lista Paciente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/paciente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"paciente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Paciente ppr ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/paciente/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"paciente",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Endereço",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cep\": \"01543001\",\r\n  \"numero\": 1006,\r\n  \"pontoReferencia\": \"perto do ponto de onibus\",\r\n  \"paciente\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/enderecoPaciente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"enderecoPaciente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Lista Endereço Paciente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/enderecoPaciente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"enderecoPaciente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Endereço Paciente por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/enderecoPaciente/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"enderecoPaciente",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Telefone Paciente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"numeroDdi\": 55,\r\n  \"numeroDdd\": 11,\r\n  \"numeroTelefone\": 944642004,\r\n  \"tipoTelefone\": \"celular\",\r\n  \"paciente\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/telefonePaciente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"telefonePaciente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Lista Telefone Paciente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/telefonePaciente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"telefonePaciente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Telefone Paciente por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/telefonePaciente/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"telefonePaciente",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Imagens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"linkUrl\": \"http://link.com\",\r\n  \"dataEnvio\": \"2004-03-14\",\r\n  \"paciente\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/imagens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"imagens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Lista  Imagens",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/imagens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"imagens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Imagens por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/imagens/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"imagens",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Quadro Clínico",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descricaoAlergias\": \"Horriveis\",\r\n  \"paciente\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/quadroClinico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"quadroClinico"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Lista Quadros Clínicos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/quadroClinico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"quadroClinico"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Quadro Clínico por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/quadroClinico/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"quadroClinico",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Unidade Hospitalar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"razaoSocial\": \"Notre Dame\",\r\n  \"numero\": 31,\r\n  \"cep\": 1234560,\r\n  \"dataCadastro\": \"2004-03-14\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/unidadeHospitalar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"unidadeHospitalar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Lista Unidades Hospitalares",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/unidadeHospitalar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"unidadeHospitalar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Unidade Hospitalar por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/unidadeHospitalar/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"unidadeHospitalar",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Consulta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"numero\": 31,\r\n  \"cep\": 1234560,\r\n  \"consulta\": \"2004-03-14T14:33:22\",\r\n  \"telefoneCentral\": \"123213132\",\r\n  \"paciente\": {\r\n    \"id\": 1\r\n  },\r\n  \"unidadeHospitalar\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/consulta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"consulta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Lista Consultas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/consulta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"consulta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Consulta por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/consulta/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"consulta",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

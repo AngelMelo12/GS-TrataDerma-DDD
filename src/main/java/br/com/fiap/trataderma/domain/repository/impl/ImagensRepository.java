@@ -98,7 +98,7 @@ public class ImagensRepository implements Repository<Imagens, Long> {
             preparedStatement = connection.prepareStatement(sql, new String[]{"id_imagem"});
             preparedStatement.setString(1, imagens.getLinkUrl());
             preparedStatement.setDate(2, Date.valueOf(imagens.getDataEnvio()));
-            preparedStatement.setLong(4, imagens.getPaciente().getId());
+            preparedStatement.setLong(3, imagens.getPaciente().getId());
             preparedStatement.executeUpdate();
 
             resultSet = preparedStatement.getGeneratedKeys();

@@ -8,6 +8,7 @@ import br.com.fiap.trataderma.infra.ConnectionFactory;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,7 +123,7 @@ public class ConsultaRepository implements Repository<Consulta, Long> {
 
     private Consulta buildConsulta(ResultSet resultSet) throws SQLException {
         var id = resultSet.getLong("id_consulta");
-        var dataHoraConsulta = resultSet.getDate("dt_hr_consulta").toInstant();
+        var dataHoraConsulta = resultSet.getDate("dt_hr_consulta").toLocalDate();
         var telCentral = resultSet.getString("tel_central");
         var idPaciente = resultSet.getLong("id_paciente");
         var idUnidHospitalar = resultSet.getLong("id_unid_hospitalar");
@@ -130,7 +131,7 @@ public class ConsultaRepository implements Repository<Consulta, Long> {
         var paciente = pacienteRepository.findById(idPaciente);
         var unidHospitalar = unidadeHospitalarRepository.findById(idUnidHospitalar);
 
-        var consulta = new Consulta(id, LocalDateTime.ofInstant(dataHoraConsulta, ZoneOffset.UTC), telCentral, paciente, unidHospitalar);
+        var consulta = new Consulta(id, LocalDateTime.of(dataHoraConsulta, LocalTime.now()), telCentral, paciente, unidHospitalar);
 
         return consulta;
     }
