@@ -12,7 +12,9 @@ public record TelefonePacienteDTO(
         Long numeroDdi,
         Long numeroDdd,
         Long numeroTelefone,
-        String tipoTelefone
+        String tipoTelefone,
+
+        PacienteDTO pacienteDTO
 ) {
 
     private static TelefonePacienteService service = new TelefonePacienteService();
@@ -33,6 +35,6 @@ public record TelefonePacienteDTO(
     }
 
     public static TelefonePacienteDTO of(TelefonePaciente entity) {
-        return new TelefonePacienteDTO( entity.getId(), entity.getNumeroDdi(), entity.getNumeroDdd(), entity.getNumeroTelefone, entity.getTipoTelefone());
+        return new TelefonePacienteDTO( entity.getId(), entity.getNumeroDdi(), entity.getNumeroDdd(), entity.getNumeroTelefone(), entity.getTipoTelefone(), PacienteDTO.of(entity.getPaciente()));
     }
 }

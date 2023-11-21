@@ -9,10 +9,10 @@ import java.util.Objects;
 public record UnidadeHospitalarDTO(
 
         Long id,
-        String RazaoSocial,
+        String razaoSocial,
         Long numero,
-        LocalDate dataCadastro,
-        String cep
+        Long cep,
+        LocalDate dataCadastro
 
 ) {
 
@@ -27,14 +27,15 @@ public record UnidadeHospitalarDTO(
         unidadeHospitalar.setId(null);
         unidadeHospitalar.setRazaoSocial(dto.razaoSocial);
         unidadeHospitalar.setNumero(dto.numero);
-        unidadeHospitalar.setDataCadastro(dto.dataCadastro);
         unidadeHospitalar.setCep(dto.cep);
+        unidadeHospitalar.setDataCadastro(dto.dataCadastro);
+
 
         return unidadeHospitalar;
     }
 
     public static UnidadeHospitalarDTO of(UnidadeHospitalar entity) {
-        return new UnidadeHospitalarDTO( entity.getId(), entity.getRazaoSocial(), entity.getNumero(), entity.getDataCadastro(), entity.getCep() );
+        return new UnidadeHospitalarDTO( entity.getId(), entity.getRazaoSocial(), entity.getNumero(), entity.getCep(), entity.getDataCadastro());
     }
 
 }

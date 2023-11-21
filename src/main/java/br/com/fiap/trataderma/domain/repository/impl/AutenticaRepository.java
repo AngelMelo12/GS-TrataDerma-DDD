@@ -83,7 +83,7 @@ public class AutenticaRepository implements Repository<Autentica, Long> {
     @Override
     public Autentica persist(Autentica autentica) {
 
-        var sql = "INSERT INTO TB_AUTENTICA (id_autentica, login, senha, st_login) values (seq_autentica.nextval,?,?,?)";
+        var sql = "INSERT INTO T_TD_AUTENTICA (id_autentica, login, senha, st_login) values (seq_autentica.nextval,?,?,?)";
 
         Connection connection = factory.getConnection();
         PreparedStatement preparedStatement = null;

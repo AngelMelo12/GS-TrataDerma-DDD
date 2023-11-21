@@ -1,19 +1,24 @@
 package br.com.fiap.trataderma.domain.dto;
 
 import br.com.fiap.trataderma.domain.entity.EnderecoPaciente;
+import br.com.fiap.trataderma.domain.entity.Paciente;
 import br.com.fiap.trataderma.domain.service.impl.EnderecoPacienteService;
+import br.com.fiap.trataderma.domain.service.impl.PacienteService;
 
 import java.util.Objects;
 
 public record EnderecoPacienteDTO(
     Long id,
-    Long numero,
     String cep,
-    String pontoReferencia
+    Long numero,
+    String pontoReferencia,
+    PacienteDTO paciente
 
 ) {
 
     private static EnderecoPacienteService service = new EnderecoPacienteService();
+
+    public static PacienteService pacienteService = new PacienteService();
 
     public static EnderecoPaciente of(EnderecoPacienteDTO dto){
 
@@ -23,14 +28,15 @@ public record EnderecoPacienteDTO(
 
         EnderecoPaciente enderecoPaciente = new EnderecoPaciente();
         enderecoPaciente.setId(null);
-        enderecoPaciente.setNumero(dto.numero);
         enderecoPaciente.setCep(dto.cep);
+        enderecoPaciente.setNumero(dto.numero);
         enderecoPaciente.setPontoReferencia(dto.pontoReferencia);
+        enderecoPaciente.setPaciente(pacienteService.findById(dto.paciente.id()));
 
         return enderecoPaciente;
     }
 
     public static EnderecoPacienteDTO of(EnderecoPaciente entity) {
-        return new EnderecoPacienteDTO(entity.getId(), entity.getNumero(), entity.getCep(), entity.getPontoReferencia());
+        return new EnderecoPacienteDTO(entity.getId(), entity.getCep(), entity.getNumero(), entity.getPontoReferencia(), PacienteDTO.of(entity.getPaciente()));
     }
 }

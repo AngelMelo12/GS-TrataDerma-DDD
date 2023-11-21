@@ -5,12 +5,15 @@ public class QuadroClinico {
     private Long id;
     private String descricaoAlergias;
 
+    Paciente paciente;
+
     public QuadroClinico() {
     }
 
-    public QuadroClinico(Long id, String descricaoAlergias) {
+    public QuadroClinico(Long id, String descricaoAlergias, Paciente paciente) {
         this.id = id;
         this.descricaoAlergias = descricaoAlergias;
+        this.paciente = paciente;
     }
 
     public Long getId() {
@@ -29,11 +32,20 @@ public class QuadroClinico {
         this.descricaoAlergias = descricaoAlergias;
     }
 
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
     @Override
     public String toString() {
         return "QuadroClinico{" +
                 "id=" + id +
                 ", descricaoAlergias='" + descricaoAlergias + '\'' +
+                ", paciente=" + paciente +
                 '}';
     }
 }

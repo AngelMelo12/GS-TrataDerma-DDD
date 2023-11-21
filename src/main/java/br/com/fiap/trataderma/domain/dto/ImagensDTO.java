@@ -2,34 +2,38 @@ package br.com.fiap.trataderma.domain.dto;
 
 import br.com.fiap.trataderma.domain.entity.Imagens;
 import br.com.fiap.trataderma.domain.service.impl.ImagensService;
+import br.com.fiap.trataderma.domain.service.impl.PacienteService;
 
-import java.sql.Blob;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public record ImagensDTO(
         Long id,
-        LocalDate envio,
-        Blob fotos
+        String linkUrl,
+        LocalDate dataEnvio,
+        PacienteDTO paciente
 
 ) {
-    private static ImagensService service = new ImagensService();
+    private static ImagensService imagensService = new ImagensService();
+    public static PacienteService pacienteService = new PacienteService();
 
     public static Imagens of(ImagensDTO dto){
 
         if(Objects.isNull(dto)) return null;
-        if(Objects.nonNull(dto.id)) return service.findById(dto.id);
+        if(Objects.nonNull(dto.id)) return imagensService.findById(dto.id);
 
         Imagens imagens = new Imagens();
         imagens.setId(null);
-        imagens.setEnvio(dto.envio);
-        imagens.setFotos(dto.fotos);
+        imagens.setLinkUrl(dto.linkUrl);
+        imagens.setDataEnvio(dto.dataEnvio);
+        imagens.setPaciente(pacienteService.findById(dto.paciente.id()));
 
         return imagens;
     }
 
         public static ImagensDTO of(Imagens entity){
-            return new ImagensDTO(entity.getId(), entity.getEnvio(), entity.getFotos());
+            return new ImagensDTO(entity.getId(), entity.getLinkUrl(), entity.getDataEnvio(), PacienteDTO.of(entity.getPaciente()));
         }
 
 }

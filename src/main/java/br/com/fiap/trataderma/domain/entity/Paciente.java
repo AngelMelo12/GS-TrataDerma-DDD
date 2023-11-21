@@ -6,16 +6,18 @@ public class Paciente {
 
     private Long id;
     private String nome;
-    private String cpf;
+    private Long cpf;
     private String rg;
     private LocalDate dataNascimento;
     private String sexo;
     private String grupoSanguineo;
 
+    Autentica autentica;
+
     public Paciente() {
     }
 
-    public Paciente(Long id, String nome, String cpf, String rg, LocalDate dataNascimento, String sexo, String grupoSanguineo) {
+    public Paciente(Long id, String nome, Long cpf, String rg, LocalDate dataNascimento, String sexo, String grupoSanguineo, Autentica autentica) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -23,6 +25,7 @@ public class Paciente {
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.grupoSanguineo = grupoSanguineo;
+        this.autentica = autentica;
     }
 
     public Long getId() {
@@ -41,11 +44,11 @@ public class Paciente {
         this.nome = nome;
     }
 
-    public String getCpf() {
+    public Long getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
 
@@ -81,16 +84,25 @@ public class Paciente {
         this.grupoSanguineo = grupoSanguineo;
     }
 
+    public Autentica getAutentica() {
+        return autentica;
+    }
+
+    public void setAutentica(Autentica autentica) {
+        this.autentica = autentica;
+    }
+
     @Override
     public String toString() {
         return "Paciente{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
+                ", cpf=" + cpf +
                 ", rg='" + rg + '\'' +
                 ", dataNascimento=" + dataNascimento +
                 ", sexo='" + sexo + '\'' +
                 ", grupoSanguineo='" + grupoSanguineo + '\'' +
+                ", autentica=" + autentica +
                 '}';
     }
 }

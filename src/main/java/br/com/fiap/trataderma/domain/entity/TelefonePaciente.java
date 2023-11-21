@@ -8,15 +8,18 @@ public class TelefonePaciente {
     private Long numeroTelefone;
     private String tipoTelefone;
 
+    private Paciente paciente;
+
     public TelefonePaciente() {
     }
 
-    public TelefonePaciente(Long id, Long numeroDdi, Long numeroDdd, Long numeroTelefone, String tipoTelefone) {
+    public TelefonePaciente(Long id, Long numeroDdi, Long numeroDdd, Long numeroTelefone, String tipoTelefone, Paciente paciente) {
         this.id = id;
         this.numeroDdi = numeroDdi;
         this.numeroDdd = numeroDdd;
         this.numeroTelefone = numeroTelefone;
         this.tipoTelefone = tipoTelefone;
+        this.paciente = paciente;
     }
 
     public Long getId() {
@@ -59,6 +62,14 @@ public class TelefonePaciente {
         this.tipoTelefone = tipoTelefone;
     }
 
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
     @Override
     public String toString() {
         return "TelefonePaciente{" +
@@ -67,6 +78,7 @@ public class TelefonePaciente {
                 ", numeroDdd=" + numeroDdd +
                 ", numeroTelefone=" + numeroTelefone +
                 ", tipoTelefone='" + tipoTelefone + '\'' +
+                ", paciente=" + paciente +
                 '}';
     }
 }

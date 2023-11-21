@@ -5,20 +5,20 @@ import java.time.LocalDate;
 public class UnidadeHospitalar {
 
     private Long id;
-    private String RazaoSocial;
+    private String razaoSocial;
     private Long numero;
+    private Long cep;
     private LocalDate dataCadastro;
-    private String cep;
 
     public UnidadeHospitalar() {
     }
 
-    public UnidadeHospitalar(Long id, String razaoSocial, Long numero, LocalDate dataCadastro, String cep) {
+    public UnidadeHospitalar(Long id, String razaoSocial, Long numero, Long cep, LocalDate dataCadastro) {
         this.id = id;
-        RazaoSocial = razaoSocial;
+        this.razaoSocial = razaoSocial;
         this.numero = numero;
-        this.dataCadastro = dataCadastro;
         this.cep = cep;
+        this.dataCadastro = dataCadastro;
     }
 
     public Long getId() {
@@ -30,11 +30,11 @@ public class UnidadeHospitalar {
     }
 
     public String getRazaoSocial() {
-        return RazaoSocial;
+        return razaoSocial;
     }
 
     public void setRazaoSocial(String razaoSocial) {
-        RazaoSocial = razaoSocial;
+        this.razaoSocial = razaoSocial;
     }
 
     public Long getNumero() {
@@ -45,6 +45,14 @@ public class UnidadeHospitalar {
         this.numero = numero;
     }
 
+    public Long getCep() {
+        return cep;
+    }
+
+    public void setCep(Long cep) {
+        this.cep = cep;
+    }
+
     public LocalDate getDataCadastro() {
         return dataCadastro;
     }
@@ -53,22 +61,15 @@ public class UnidadeHospitalar {
         this.dataCadastro = dataCadastro;
     }
 
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
     @Override
     public String toString() {
         return "UnidadeHospitalar{" +
                 "id=" + id +
-                ", RazaoSocial='" + RazaoSocial + '\'' +
+                ", razaoSocial='" + razaoSocial + '\'' +
                 ", numero=" + numero +
+                ", cep=" + cep +
                 ", dataCadastro=" + dataCadastro +
-                ", cep='" + cep + '\'' +
                 '}';
     }
 }
+

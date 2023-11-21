@@ -6,10 +6,7 @@ import br.com.fiap.trataderma.domain.entity.UnidadeHospitalar;
 import br.com.fiap.trataderma.domain.repository.Repository;
 import br.com.fiap.trataderma.infra.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
@@ -65,12 +62,62 @@ public class ConsultaRepository implements Repository<Consulta, Long> {
 
     @Override
     public Consulta findById(Long id) {
-        return null;
+
+        Consulta consulta = null;
+
+        var sql = "SELECT * FROM T_TD_CONSULTA WHERE ID_CONSULTA = ?";
+
+        Connection connection = factory.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    consulta = buildConsulta(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Não foi possível realizar a consulta ao banco de dados: " + e.getMessage());
+        } finally {
+            fecharObjetos(resultSet, preparedStatement, connection);
+        }
+        return consulta;
+
     }
 
     @Override
     public Consulta persist(Consulta consulta) {
-        return null;
+
+        var sql = "INSERT INTO T_TD_CONSULTA (id_consulta, dt_hr_consulta, tel_central, id_paciente, id_unid_hospitalar) values (seq_consulta.nextval,?,?,?,?)";
+
+        Connection connection = factory.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(sql, new String[]{"id_consulta"});
+            preparedStatement.setDate(1, Date.valueOf(consulta.getConsulta().toLocalDate()));
+            preparedStatement.setString(2, consulta.getTelefoneCentral());
+            preparedStatement.setLong(3, consulta.getPaciente().getId());
+            preparedStatement.setLong(4, consulta.getUnidadeHospitalar().getId());
+            preparedStatement.executeUpdate();
+
+            resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                consulta.setId(resultSet.getLong(1));
+            }
+        } catch (SQLException e) {
+            System.err.println( "Não foi possível salvar no banco de dados: " + e.getMessage() + "\n" + e.getCause() + "\n" + e.getErrorCode());
+        } finally {
+            fecharObjetos(resultSet, preparedStatement, connection);
+        }
+
+        return consulta;
     }
 
     private Consulta buildConsulta(ResultSet resultSet) throws SQLException {

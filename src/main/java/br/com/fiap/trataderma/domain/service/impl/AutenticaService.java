@@ -24,7 +24,7 @@ public class AutenticaService implements Service<Autentica, Long> {
     @Override
     public Autentica persist(Autentica autentica) {
 
-        if (Objects.nonNull(autentica)){
+        if (!Objects.nonNull(autentica)){
             System.err.println("Dados inválidos");
             return new Autentica();
         }

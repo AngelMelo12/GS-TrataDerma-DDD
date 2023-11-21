@@ -25,7 +25,7 @@ public class ConsultaService implements Service<Consulta, Long> {
     @Override
     public Consulta persist(Consulta consulta) {
 
-        if (Objects.nonNull(consulta)){
+        if (!Objects.nonNull(consulta)){
             System.err.println("Dados inválidos");
             return new Consulta();
         }

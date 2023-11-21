@@ -3,19 +3,16 @@ package br.com.fiap.trataderma.domain.resource;
 import br.com.fiap.trataderma.domain.dto.ConsultaDTO;
 import br.com.fiap.trataderma.domain.entity.Consulta;
 import br.com.fiap.trataderma.domain.service.impl.ConsultaService;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriBuilder;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
 
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
+@Path("/consulta")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class ConsultaResource implements Resource<ConsultaDTO, Long> {
 
     @Context
