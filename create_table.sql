@@ -414,7 +414,7 @@ select * from t_td_quadro_clinico;
 select * from t_td_consulta;
 select * from t_td_telefone_paciente;
 select * from t_td_endereco_paciente;
-
+select * from t_td_unid_hospitalar;
 
 --------SELECT JUNÇÃO DAS TABELAS
 ------- MOSTRAR PACIENTES COM TIPO SANGUINEO 'O-'

@@ -80,6 +80,35 @@ public class AutenticaRepository implements Repository<Autentica, Long> {
         return autentica;
     }
 
+    public Autentica findByLogin(String login, String senha) {
+
+        Autentica autentica = null;
+
+        var sql = "SELECT * FROM T_TD_AUTENTICA WHERE LOGIN = ? AND SENHA = ?";
+
+        Connection connection = factory.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, senha);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    autentica = buildAutentica(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Não foi possível realizar a consulta ao banco de dados: " + e.getMessage());
+        } finally {
+            fecharObjetos(resultSet, preparedStatement, connection);
+        }
+        return autentica;
+    }
+
     @Override
     public Autentica persist(Autentica autentica) {
 

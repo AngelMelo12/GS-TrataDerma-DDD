@@ -6,6 +6,8 @@ import br.com.fiap.trataderma.domain.repository.Repository;
 import br.com.fiap.trataderma.infra.ConnectionFactory;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -86,19 +88,21 @@ public class PacienteRepository implements Repository<Paciente, Long> {
 
     @Override
     public Paciente persist(Paciente paciente) {
-
         var sql = "INSERT INTO T_TD_PACIENTE (id_paciente, nm_paciente, nr_cpf, nr_rg, dt_nascimento, fl_sexo, tip_grupo_sanguineo, id_autentica) values (seq_paciente.nextval,?,?,?,?,?,?,?)";
 
         Connection connection = factory.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = paciente.getDataNascimento().format(dateTimeFormatter);
+
         try {
             preparedStatement = connection.prepareStatement(sql, new String[]{"id_paciente"});
             preparedStatement.setString(1, paciente.getNome());
-            preparedStatement.setLong(2, paciente.getCpf());
+            preparedStatement.setString(2, String.valueOf(paciente.getCpf()));
             preparedStatement.setString(3, paciente.getRg());
-            preparedStatement.setDate(4, Date.valueOf(paciente.getDataNascimento()));
+            preparedStatement.setString(4, formattedDate);
             preparedStatement.setString(5, paciente.getSexo());
             preparedStatement.setString(6, paciente.getGrupoSanguineo());
             preparedStatement.setLong(7, paciente.getAutentica().getId());
@@ -120,7 +124,7 @@ public class PacienteRepository implements Repository<Paciente, Long> {
     private Paciente buildPaciente(ResultSet resultSet) throws SQLException {
         var id = resultSet.getLong("id_paciente");
         var nome = resultSet.getString("nm_paciente");
-        var cpf = resultSet.getLong("nr_cpf");
+        var cpf = resultSet.getString("nr_cpf");
         var rg = resultSet.getString("nr_rg");
         var dataNascimento = resultSet.getDate("dt_nascimento").toLocalDate();
         var sexo = resultSet.getString("fl_sexo");

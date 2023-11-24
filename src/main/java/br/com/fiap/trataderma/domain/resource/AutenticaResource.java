@@ -50,4 +50,12 @@ public class AutenticaResource implements Resource<AutenticaDTO, Long>{
 
         return Response.created(uri).entity(AutenticaDTO.of(persisted)).build();
     }
+
+    @POST
+    @Path("/login")
+    public Response findByLogin(AutenticaDTO autenticaDTO) {
+        Autentica entity = service.findByLogin(autenticaDTO.login(), autenticaDTO.senha());
+        if (Objects.isNull(entity)) return Response.status(404).build();
+        return Response.ok(AutenticaDTO.of(entity)).build();
+    }
 }

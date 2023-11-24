@@ -1,5 +1,6 @@
 package br.com.fiap.trataderma.domain.dto;
 
+import br.com.fiap.trataderma.domain.entity.Autentica;
 import br.com.fiap.trataderma.domain.entity.Paciente;
 import br.com.fiap.trataderma.domain.service.impl.AutenticaService;
 import br.com.fiap.trataderma.domain.service.impl.ImagensService;
@@ -12,12 +13,12 @@ public record PacienteDTO(
 
         Long id,
         String nome,
-        Long cpf,
+        String cpf,
         String rg,
         LocalDate dataNascimento,
         String sexo,
         String grupoSanguineo,
-        AutenticaDTO autentica
+        Long id_autentica
 ) {
 
     private static PacienteService pacienteService = new PacienteService();
@@ -37,12 +38,12 @@ public record PacienteDTO(
         paciente.setDataNascimento(dto.dataNascimento());
         paciente.setSexo(dto.sexo);
         paciente.setGrupoSanguineo(dto.grupoSanguineo);
-        paciente.setAutentica(autenticaService.findById(dto.autentica.id()));
+        paciente.setAutentica(new Autentica(dto.id_autentica(),null, null, null));
 
         return paciente;
     }
 
     public static PacienteDTO of(Paciente entity){
-        return new PacienteDTO(entity.getId(), entity.getNome(), entity.getCpf(), entity.getRg(), entity.getDataNascimento(), entity.getSexo(), entity.getGrupoSanguineo(), AutenticaDTO.of(entity.getAutentica()));
+        return new PacienteDTO(entity.getId(), entity.getNome(), entity.getCpf(), entity.getRg(), entity.getDataNascimento(), entity.getSexo(), entity.getGrupoSanguineo(), entity.getAutentica().getId());
     }
 }

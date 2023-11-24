@@ -21,6 +21,10 @@ public class AutenticaService implements Service<Autentica, Long> {
         return repository.findById(id);
     }
 
+    public Autentica findByLogin(String login, String senha) {
+        return repository.findByLogin(login, senha);
+    }
+
     @Override
     public Autentica persist(Autentica autentica) {
 

@@ -6,7 +6,7 @@ public class Paciente {
 
     private Long id;
     private String nome;
-    private Long cpf;
+    private String cpf;
     private String rg;
     private LocalDate dataNascimento;
     private String sexo;
@@ -17,7 +17,7 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Paciente(Long id, String nome, Long cpf, String rg, LocalDate dataNascimento, String sexo, String grupoSanguineo, Autentica autentica) {
+    public Paciente(Long id, String nome, String cpf, String rg, LocalDate dataNascimento, String sexo, String grupoSanguineo, Autentica autentica) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -44,11 +44,11 @@ public class Paciente {
         this.nome = nome;
     }
 
-    public Long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(Long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
