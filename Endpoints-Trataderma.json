@@ -53,18 +53,31 @@
 		},
 		{
 			"name": "Consulta Autentica por ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost/autentica/6",
+					"raw": "http://localhost/paciente/autentica/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
+						"paciente",
 						"autentica",
-						"6"
+						"1"
 					],
 					"query": [
 						{
@@ -84,7 +97,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"nome\": \"PACIENTE\",\r\n  \"cpf\": 12345,\r\n  \"rg\": 1222,\r\n  \"dataNascimento\": \"2005-03-14\",\r\n  \"sexo\": \"f\",\r\n  \"grupoSanguineo\": \"A-\",\r\n  \"autentica\": {\r\n    \"id\": 11\r\n  }\r\n}",
+					"raw": "{\r\n  \"nome\": \"Xuxa pqp\",\r\n  \"cpf\": \"12345678\",\r\n  \"rg\": \"12227\",\r\n  \"dataNascimento\": \"2005-03-14\",\r\n  \"sexo\": \"f\",\r\n  \"grupoSanguineo\": \"A-\",\r\n  \"id_autentica\": \"12\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -148,7 +161,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"cep\": \"023001\",\r\n  \"numero\": 1006,\r\n  \"pontoReferencia\": \"sonibus\",\r\n  \"paciente\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"raw": "{\r\n  \"cep\": \"023001\",\r\n  \"numero\": 1006,\r\n  \"pontoReferencia\": \"sonibus\",\r\n  \"paciente\": {\r\n    \"id\": 28\r\n  }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -212,7 +225,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"numeroDdi\": 55,\r\n  \"numeroDdd\": 11,\r\n  \"numeroTelefone\": 944642004,\r\n  \"tipoTelefone\": \"celular\",\r\n  \"paciente\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"raw": "{\r\n  \"numeroDdi\": 55,\r\n  \"numeroDdd\": 11,\r\n  \"numeroTelefone\": 944642004,\r\n  \"tipoTelefone\": \"celular\",\r\n  \"paciente\": {\r\n    \"id\": 28\r\n  }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -276,7 +289,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"linkUrl\": \"http://link.com\",\r\n  \"dataEnvio\": \"2004-03-14\",\r\n  \"paciente\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"raw": "{\r\n  \"linkUrl\": \"http://link.com\",\r\n  \"dataEnvio\": \"2004-03-14\",\r\n  \"paciente\": {\r\n    \"id\": 28\r\n  }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -340,7 +353,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"descricaoAlergias\": \"Alergia começou semana passada e houve uma piora na coceira e ocorreu descamação\",\r\n  \"paciente\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"raw": "{\r\n  \"descricaoAlergias\": \"Alergia começou semana passada e houve uma piora na coceira e ocorreu descamação\",\r\n  \"paciente\": {\r\n    \"id\": 20\r\n  }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -468,7 +481,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"numero\": 22,\r\n  \"cep\": 12334,\r\n  \"consulta\": \"2004-03-14T14:33:22\",\r\n  \"telefoneCentral\": \"123213132\",\r\n  \"paciente\": {\r\n    \"id\": 1\r\n  },\r\n  \"unidadeHospitalar\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"raw": "{\r\n  \"numero\": 22,\r\n  \"cep\": 12334,\r\n  \"consulta\": \"2004-03-14T14:33:22\",\r\n  \"telefoneCentral\": \"123213132\",\r\n  \"paciente\": {\r\n    \"id\": 28\r\n  },\r\n  \"unidadeHospitalar\": {\r\n    \"id\": 2\r\n  }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
