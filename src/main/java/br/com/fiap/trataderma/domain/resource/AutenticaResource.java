@@ -13,7 +13,7 @@ import java.util.Objects;
 @Path("/autentica")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class AutenticaResource implements Resource<AutenticaDTO, Long>{
+public class AutenticaResource implements Resource<AutenticaDTO, Long> {
 
     @Context
     UriInfo uriInfo;
@@ -31,7 +31,7 @@ public class AutenticaResource implements Resource<AutenticaDTO, Long>{
     @GET
     @Path("/{id}")
     @Override
-    public Response findById(@PathParam("id")Long id) {
+    public Response findById(@PathParam("id") Long id) {
         Autentica entity = service.findById(id);
         if (Objects.isNull(entity)) return Response.status(404).build();
         return Response.ok(AutenticaDTO.of(entity)).build();

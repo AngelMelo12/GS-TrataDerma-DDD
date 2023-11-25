@@ -22,6 +22,10 @@ public class PacienteService implements Service<Paciente, Long> {
         return repository.findById(id);
     }
 
+    public Paciente findByIdAutentica(Long id) {
+        return repository.findByIdAutentica(id);
+    }
+
     @Override
     public Paciente persist(Paciente paciente) {
 

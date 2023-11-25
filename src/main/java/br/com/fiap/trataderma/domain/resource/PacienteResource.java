@@ -36,6 +36,14 @@ public class PacienteResource implements Resource<PacienteDTO, Long>{
         return Response.ok(PacienteDTO.of(entity)).build();
     }
 
+    @GET
+    @Path("/autentica/{id}")
+    public Response findByIdAutentica(@PathParam("id")Long id) {
+        Paciente entity = service.findByIdAutentica(id);
+        if (Objects.isNull(entity)) return Response.status(404).build();
+        return Response.ok(PacienteDTO.of(entity)).build();
+    }
+
     @POST
     @Override
     public Response persist(PacienteDTO pacientedto) {

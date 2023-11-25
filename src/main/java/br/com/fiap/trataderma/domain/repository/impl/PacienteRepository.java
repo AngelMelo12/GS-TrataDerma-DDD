@@ -86,6 +86,34 @@ public class PacienteRepository implements Repository<Paciente, Long> {
         return paciente;
     }
 
+    public Paciente findByIdAutentica(Long id) {
+
+        Paciente paciente = null;
+
+        var sql = "SELECT * FROM T_TD_PACIENTE WHERE ID_AUTENTICA = ?";
+
+        Connection connection = factory.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    paciente = buildPaciente(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Não foi possível realizar a consulta ao banco de dados: " + e.getMessage());
+        } finally {
+            fecharObjetos(resultSet, preparedStatement, connection);
+        }
+        return paciente;
+    }
+
     @Override
     public Paciente persist(Paciente paciente) {
         var sql = "INSERT INTO T_TD_PACIENTE (id_paciente, nm_paciente, nr_cpf, nr_rg, dt_nascimento, fl_sexo, tip_grupo_sanguineo, id_autentica) values (seq_paciente.nextval,?,?,?,?,?,?,?)";
